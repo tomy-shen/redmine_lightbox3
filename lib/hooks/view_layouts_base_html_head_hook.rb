@@ -1,24 +1,25 @@
-module RedmineLightbox2
-  module Hooks
-    class ViewLayoutsBaseHtmlHeadHook < Redmine::Hook::ViewListener
-      def view_layouts_base_html_head(context={})
-        if context[:controller] && (  context[:controller].is_a?(IssuesController) ||
-                                      (Object.const_defined?('DmsfController') && context[:controller].is_a?(DmsfController)) ||
-                                      (Object.const_defined?('ContactsController') && context[:controller].is_a?(ContactsController)) ||
-                                      (Object.const_defined?('ArticlesController') && context[:controller].is_a?(ArticlesController)) ||
-                                      context[:controller].is_a?(WikiController) ||
-                                      context[:controller].is_a?(DocumentsController) ||
-                                      context[:controller].is_a?(FilesController) ||
-                                      context[:controller].is_a?(MessagesController) ||
-                                      context[:controller].is_a?(NewsController))
-          return stylesheet_link_tag("jquery.fancybox-3.5.7.min.css", :plugin => "redmine_lightbox2", :media => "screen") +
-            stylesheet_link_tag("lightbox.css", :plugin => "redmine_lightbox2", :media => "screen") +
-            javascript_include_tag('jquery.fancybox-3.5.7.min.js', :plugin => 'redmine_lightbox2') +
-            javascript_include_tag('lightbox.js', :plugin => 'redmine_lightbox2')
-        else
-          return ''
-        end
-      end
+# redmine_lightbox3/lib/hooks/view_layouts_base_html_head_hook.rb
+
+module Hooks
+  class ViewLayoutsBaseHtmlHeadHook < Redmine::Hook::ViewListener
+    # 這是將 JS/CSS 包含進去的函式
+    def view_layouts_base_html_head(context={})
+      
+      # 確保所有路徑都包含子目錄 'javascripts/' 或 'stylesheets/'
+      
+      # 載入 JavaScript
+      js_tags = [
+        '<script src="/plugin_assets/redmine_lightbox3/javascripts/jquery.fancybox-3.5.7.min.js" type="text/javascript"></script>',
+        '<script src="/plugin_assets/redmine_lightbox3/javascripts/lightbox.js" type="text/javascript"></script>'
+      ].join("\n")
+
+      # 載入 CSS
+      css_tags = [
+        '<link href="/plugin_assets/redmine_lightbox3/stylesheets/jquery.fancybox-3.5.7.min.css" media="all" rel="stylesheet" type="text/css" />',
+        '<link href="/plugin_assets/redmine_lightbox3/stylesheets/lightbox.css" media="all" rel="stylesheet" type="text/css" />'
+      ].join("\n")
+
+      (js_tags + "\n" + css_tags).html_safe
     end
   end
 end

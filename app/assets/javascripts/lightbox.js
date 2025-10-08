@@ -1,3 +1,5 @@
+// redmine_lightbox3/app/assets/javascripts/lightbox.js
+
 $(document).ready(function() {
   // the file extension regex matching on supported image and pdf types
   var extensionRegexImage = /\.(png|jpe?g|gif|bmp)$/i;
@@ -41,11 +43,9 @@ $(document).ready(function() {
   // add rel attribute to thumbnails of the same journal entry
   $("div.journal div.thumbnails a").each(function(i, obj) {
     var relgroup = 'thumbnails-' + $(this).closest('div.journal').attr('id')
-    var title = $(this).attr('title');
     $(this)
       .attr('rel', relgroup)
       .attr('data-fancybox', relgroup)
-      .attr('data-caption', title);
   });
 
 
@@ -63,24 +63,6 @@ $(document).ready(function() {
         .addClass(isPdf ? 'lightbox pdf' : 'lightbox')
         .attr('data-type', isPdf ? 'iframe' : 'image')
         .attr('data-caption', title ? filename + ' - ' + title : filename);
-    }
-  });
-
-
-  // #76 support for issue list attachment column
-  $("table.list.issues td.attachments a").each(function(i, obj) {
-    var href = $(this).attr('href');
-    var filename = $(this).text();
-    // Also support PDF preview in lightbox
-    var isPdf = filename.match(/\.pdf$/i);
-    // only apply thumbnail class to image and pdf links
-    if(filename.match(extensionRegexAll)) {
-      $(this)
-        .attr('href', href.replace(/\/attachments\/(\d+)/g,'/attachments/download/$1/' + filename))
-        .addClass(isPdf ? 'lightbox pdf' : 'lightbox')
-        .attr('data-type', isPdf ? 'iframe' : 'image')
-        .attr('data-fancybox', 'issue-list-attachments-' + $(this).closest('tr').attr('id'))
-        .attr('data-caption', filename);
     }
   });
 
@@ -179,10 +161,10 @@ $(document).ready(function() {
   .add(".avatar a")
   .add("table.list.files td.filename a.lightbox")
   .fancybox({
-    animationEffect    : 'zoom',
-    animationDuration  : 200,
-    transitionEffect   : 'fade',
-    transitionDuration : 200,
+    animationEffect     : 'zoom',
+    animationDuration   : 200,
+    transitionEffect    : 'fade',
+    transitionDuration  : 200,
     buttons: [
       'zoom',
       'fullScreen',
@@ -199,11 +181,11 @@ $(document).ready(function() {
   .add( $("div.journal ul.details a:not(.icon-download)").filter(function(index,elem) { return $(elem).attr('href').match(/\.pdf$/i) }) )
   .add( $("div.journal div.thumbnails a").filter(function(index,elem) { return $(elem).attr('href').match(/\.pdf$/i) }) )
   .fancybox({
-    animationEffect    : 'zoom',
-    animationDuration  : 200,
-    transitionEffect   : 'fade',
-    transitionDuration : 200,
-    type               : 'iframe',
+    animationEffect     : 'zoom',
+    animationDuration   : 200,
+    transitionEffect    : 'fade',
+    transitionDuration  : 200,
+    type                : 'iframe',
     iframe : {
       preload: true
     },

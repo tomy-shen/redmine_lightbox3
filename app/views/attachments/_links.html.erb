@@ -5,7 +5,7 @@
               container_attachments_edit_path(container),
               :title => l(:label_edit_attachments),
               :class => 'icon-only icon-edit'
-             ) if options[:editable] %>
+              ) if options[:editable] %>
 </div>
 
 <table>
@@ -32,7 +32,7 @@
       </td>
       <td class="alignrigth">
       <%= link_to l(:button_view),
-                  { :controller => 'attachments', :action => 'download_inline', :id => attachment, :filename => attachment.filename },
+                  { :controller => 'attachments', :action => 'download', :id => attachment, :filename => attachment.filename },
                   :class => 'icon-only icon-magnifier lightbox_preview pdf',
                   :rel => 'attachments', :title => l(:label_preview),
                   :data  => {

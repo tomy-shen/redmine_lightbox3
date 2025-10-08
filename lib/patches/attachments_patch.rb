@@ -1,20 +1,27 @@
-require_dependency 'attachment'
-module RedmineLightbox2
+# redmine_lightbox3/lib/patches/attachments_patch.rb
+
+module Patches # <-- 新增：包在 Patches 模組中
   module AttachmentsPatch
-    def self.included(base) # :nodoc:
+    def self.included(base)
+      base.extend(ClassMethods)
+      base.send(:include, InstanceMethods)
+
       base.class_eval do
-        unloadable # Send unloadable so it will not be unloaded in development
+        # 給附件連結新增 css class
+        alias_method_chain :link_to_attachment, :lightbox_class
+      end
+    end
 
-        def download_inline
-          # apply before_filters
-          find_attachment
-          file_readable
-          read_authorize
+    module ClassMethods
+    end
 
-          send_file @attachment.diskfile, :filename => filename_for_content_disposition(@attachment.filename),
-                    :type => detect_content_type(@attachment),
-                    :disposition => 'inline'
-        end
+    module InstanceMethods
+      # 在連結中新增 css class "lightbox"
+      def link_to_attachment_with_lightbox_class(options = {})
+        # 原始的方法
+        link_to_attachment_without_lightbox_class(options).
+          gsub('>').
+          gsub('</a>', ' class="lightbox"></a>')
       end
     end
   end

@@ -23,8 +23,6 @@ $ rake redmine:plugins:migrate RAILS_ENV=production
 ```
 * Restart Redmine
 
-> Due to the update of redmine 6, CSS or javascript probably need to be precompiled after the initial installation. Reference [here](https://www.redmine.org/issues/41754).
-
 ## Screenshots
 
 ![screenshot01](screenshots/lightbox3-attachment-preview.png)

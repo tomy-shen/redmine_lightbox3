@@ -41,7 +41,7 @@ Redmine::Plugin.register :redmine_lightbox3 do
   name 'Lightbox3 Plugin (Support Redmine 6 or higher)'
   author 'tomy'
   description 'This is a plugin for Redmine to preview image and PDF attachments in a lightbox'
-  version '1.0.0'
+  version '1.1.0'
   url 'https://redmine-tw.net'
   author_url 'https://github.com/tomy-shen'
 

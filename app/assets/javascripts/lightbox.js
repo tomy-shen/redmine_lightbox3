@@ -2,6 +2,8 @@
  * Lightbox3 for Redmine 6 - Universal Compatibility Version
  * This script is designed to work with both Redmine 6.0.x and 6.1.x,
  * especially handling the different HTML structures for journal attachments.
+ *
+ * UPDATE: The applyLightbox function now explicitly ignores download icon links.
  */
 $(document).ready(function() {
 
@@ -11,7 +13,8 @@ $(document).ready(function() {
         var href = $link.attr('href') || "";
         var text = $link.text() || "";
 
-        if ($link.hasClass('delete') || $link.hasClass('icon-del') || href === "") {
+        // THE KEY CHANGE IS HERE: We added a new condition to ignore download icons.
+        if ($link.hasClass('delete') || $link.hasClass('icon-del') || $link.hasClass('icon-download') || href === "") {
             return;
         }
 
@@ -34,8 +37,6 @@ $(document).ready(function() {
     });
 
     // 2. Journal / Notes Section - The key compatibility fix
-    // This selector now includes patterns for BOTH Redmine 6.0.x and 6.1.x.
-    // It will find the correct links in either environment.
     var journalAttachmentSelectors = [
         'div.journal ul.details a[href*="/attachments/"]:not(.icon-download)',    // Redmine 6.0.x filename links
         'div.journal div.thumbnails a',                                         // Redmine 6.0.x thumbnail links
@@ -46,8 +47,6 @@ $(document).ready(function() {
     $(journalAttachmentSelectors).each(function() {
         var $link = $(this);
         var wrongHref = $link.attr('href');
-        
-        // Find the filename from either img alt/title or the link text itself.
         var filename = $link.find('img').attr('alt') || $link.find('img').attr('title') || $link.text().trim();
 
         if (wrongHref && filename) {

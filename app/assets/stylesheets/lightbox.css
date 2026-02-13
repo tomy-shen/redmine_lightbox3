@@ -17,6 +17,10 @@ div.attachments div.images > div {
 }
 div.thumbnails img {
   max-width: 150px;
+  border: 1px solid #CCCCCC;
+  padding: 2px;
+  background: #FFFFFF;
+}
 }
 
 a.lightbox_preview img  {
@@ -61,3 +65,15 @@ img.fancybox-image {
 .fancybox-prev {
   left: -70px;
 }
+
+/* Горизонтальное отображение миниатюр в шапке задачи */
+div.attachments div.thumbnails.images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+div.attachments div.thumbnails.images > div {
+  margin: 0;
+}
+

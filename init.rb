@@ -38,14 +38,14 @@ end
 
 # --- Plugin Registration ---
 Redmine::Plugin.register :redmine_lightbox3 do
-  name 'Lightbox3 Plugin (Support Redmine 6 or higher)'
+  name 'Lightbox3 Plugin (Support Redmine 7)'
   author 'tomy'
   description 'This is a plugin for Redmine to preview image and PDF attachments in a lightbox'
-  version '1.2.0'
+  version '2.0.0'
   url 'https://redmine-tw.net'
   author_url 'https://github.com/tomy-shen'
 
-  requires_redmine version_or_higher: '6.0.0'
+  requires_redmine version_or_higher: '7.0.0'
 
   require_relative 'lib/hooks/view_layouts_base_html_head_hook'
 

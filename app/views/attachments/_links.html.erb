@@ -17,36 +17,18 @@
       <%= link_to_attachment attachment, :class => 'icon icon-attachment lightbox_preview', :download => true -%>
       </td>
       <td class="alignrigth">
-      <%= link_to l(:button_view),
-                  { :controller => 'attachments', :action => 'download', :id => attachment, :filename => attachment.filename },
-                  :class => 'icon-only icon-magnifier lightbox_preview ' + attachment.filename.split('.').last.downcase,
-                  :rel => 'attachments', :title => l(:label_preview),
-                  :data  => {
-                    :type => 'image',
-                    :fancybox => 'attachments',
-                    :caption => caption
-                  } %>
 
     <% elsif attachment.is_pdf? %>
       <%= link_to_attachment attachment, :class => 'icon icon-attachment lightbox_preview pdf', :download => true -%>
       </td>
       <td class="alignrigth">
-      <%= link_to l(:button_view),
-                  { :controller => 'attachments', :action => 'download', :id => attachment, :filename => attachment.filename },
-                  :class => 'icon-only icon-magnifier lightbox_preview pdf',
-                  :rel => 'attachments', :title => l(:label_preview),
-                  :data  => {
-                    :type => 'iframe',
-                    :fancybox => 'attachments',
-                    :caption => caption
-                  } %>
 
     <% else %>
       <%= link_to_attachment attachment, :class => 'icon icon-attachment' -%>
       </td>
       <td class="alignrigth">
     <% end %>
-    <%= link_to_attachment attachment, class: 'icon-only icon-download', title: l(:button_download), download: true -%>
+    <%= link_to_attachment attachment, class: 'icon-only icon-download', title: l(:button_download), download: true, icon: 'download' -%>
   </td>
   <td class="alignrigth">
     <span class="size"><%= number_to_human_size attachment.filesize %></span>
@@ -59,7 +41,7 @@
   </td>
   <td>
     <% if options[:deletable] %>
-      <%= link_to l(:button_delete), attachment_path(attachment),
+      <%= link_to sprite_icon('del', l(:button_delete)), attachment_path(attachment),
                   :data => {:confirm => l(:text_are_you_sure)},
                   :method => :delete,
                   :class => 'delete icon-only icon-del',

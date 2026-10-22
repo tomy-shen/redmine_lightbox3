@@ -1,6 +1,6 @@
 # Redmine Lightbox 3
 
-![Redmine](https://img.shields.io/badge/Redmine-6.0-brightgreen)
+![Redmine](https://img.shields.io/badge/Redmine-7.0-brightgreen)
 [![Software License](https://img.shields.io/badge/license-MIT-blueviolet.svg)](LICENSE)
 
 This plugin lets you preview image (JPG, GIF, PNG, BMP) and PDF attachments in a lightbox.
